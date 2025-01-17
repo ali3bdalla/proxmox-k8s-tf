@@ -21,8 +21,8 @@
 🌐 1. **Clone the Repository:** 🌐
 
 ```bash
-git clone <repository_url>
-cd <repository_name>
+git clone https://github.com/ali3bdalla/proxmox-k8s-tf
+cd proxmox-k8s-tf
 ```
 
 🛠️ 2. **Define Variables:** 🛠️
@@ -61,11 +61,43 @@ Confirm the execution when prompted.
 
 🔧 Refer to `sample.tfvars.example` for all required and optional variables. Key variables include: 🔧
 
-- `proxmox_host`: The Proxmox server address.
-- `template_name`: The name of the predefined template.
+- `pm_api_url`: The Proxmox API endpoint URL, typically in the format `https://<proxmox-host>:8006/api2/json`.
+- `pve_nodes`: A list of Proxmox nodes where the VMs will be deployed.
+- `pm_enable_debug`: Enable or disable debug mode for the Proxmox API.
+- `pm_user`: The username for authenticating with Proxmox (e.g., `root@pam` or `<user>@pve`).
+- `pm_password`: The password for the Proxmox user.
+- `ssh_keys`: SSH public key(s) to be injected into the VMs.
+- `template_name`: The name of the predefined VM template available on the Proxmox nodes.
 - `controller_count`: Number of Kubernetes controller plane nodes.
 - `worker_count`: Number of Kubernetes worker nodes.
 - Networking, storage, and other cluster-specific parameters.
+
+## Sample Variables
+
+Below is an example of the variables you can define in your `terraform.tfvars` file:
+
+```hcl
+pm_api_url      = "https://proxmox-host:8006/api2/json"
+pve_nodes       = ["pve-1", "pve-2", "pve-3"]
+pm_enable_debug = true
+pm_user         = "test@pve"
+pm_password     = "x"
+ssh_keys        = ""
+template_name   = "u-2404-tmpl"
+```
+
+## Extracting Ansible Inventory
+
+🔧 To generate an `inventory.yaml` file for Ansible: 🔧
+
+1. Install the required Python dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+2. Run the provided script to build the inventory:
+   ```bash
+   python build-inventory.py
+   ```
 
 ## Cleanup
 
