@@ -1,0 +1,7 @@
+pm_api_url      = "https://proxmox-host:8006/api2/json"
+pve_nodes       = ["pve-1", "pve-2", "pve-3"]
+pm_enable_debug = true
+pm_user         = "test@pve"
+pm_password     = "x"
+ssh_keys        = ""
+template_name   = "u-2404-tmpl"
