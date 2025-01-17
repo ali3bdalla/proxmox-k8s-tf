@@ -1,0 +1,41 @@
+# Terraform state files
+*.tfstate
+*.tfstate.*
+.env
+# Crash log files
+crash.log
+
+# Terraform variables files (sensitive information)
+*.tfvars
+*.tfvars.json
+
+# Override files (local changes, not meant to be committed)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# CLI configuration files
+.terraformrc
+terraform.rc
+
+# Local directory for Terraform plugins
+.terraform/
+
+# Plan files
+*.tfplan
+
+# Lock files (optional, depending on your preference)
+*.lock.hcl
+
+# Backup files created by Terraform
+*.backup
+
+terraform-plugin-proxmox.log
+
+
+inventory.yaml
+*.tfvars
+*.log
+
+state-backend.tf
