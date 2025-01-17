@@ -114,8 +114,8 @@ resource "proxmox_vm_qemu" "controler_3" {
 
 output "controllers_ipconfig" {
   value = {
-    controller_1 = proxmox_vm_qemu.controler_1.ipconfig0
-    controller_2 = proxmox_vm_qemu.controler_2.ipconfig0
-    controller_3 = proxmox_vm_qemu.controler_3.ipconfig0
+    "${proxmox_vm_qemu.controler_1.name}" = proxmox_vm_qemu.controler_1.ipconfig0
+    "${proxmox_vm_qemu.controler_2.name}" = proxmox_vm_qemu.controler_2.ipconfig0
+    "${proxmox_vm_qemu.controler_3.name}" = proxmox_vm_qemu.controler_3.ipconfig0
   }
 }
