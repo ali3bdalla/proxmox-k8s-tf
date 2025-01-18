@@ -1,6 +1,7 @@
 resource "proxmox_vm_qemu" "controler_1" {
   name                        = "rke2-controller-1"
   target_node                 = "pve-1"
+  protection                  = true
   vmid                        = 20001
   vm_state                    = "running"
   ciuser                      = "appdepl"
@@ -26,9 +27,10 @@ resource "proxmox_vm_qemu" "controler_1" {
   ipconfig0                   = "gw=10.100.70.1,ip=10.100.70.101/24,ip6=dhcp"
   onboot                      = true
   network {
+    id        = 0
     model     = "virtio"
     bridge    = "vmbr0"
-    firewall  = false
+    firewall  = true
     link_down = false
     tag       = 70
   }
@@ -40,6 +42,7 @@ resource "proxmox_vm_qemu" "controler_2" {
   name                        = "rke2-controller-2"
   target_node                 = "pve-2"
   vmid                        = 20002
+  protection                  = true
   vm_state                    = "running"
   ciuser                      = "appdepl"
   desc                        = <<-EOT
@@ -64,9 +67,10 @@ resource "proxmox_vm_qemu" "controler_2" {
   ipconfig0                   = "gw=10.100.70.1,ip=10.100.70.102/24,ip6=dhcp"
   onboot                      = true
   network {
+    id        = 0
     model     = "virtio"
     bridge    = "vmbr0"
-    firewall  = false
+    firewall  = true
     link_down = false
     tag       = 70
   }
@@ -102,10 +106,12 @@ resource "proxmox_vm_qemu" "controler_3" {
   force_recreate_on_change_of = "cicustom"
   ipconfig0                   = "gw=10.100.70.1,ip=10.100.70.103/24,ip6=dhcp"
   onboot                      = true
+  protection                  = true
   network {
+    id        = 0
     model     = "virtio"
     bridge    = "vmbr0"
-    firewall  = false
+    firewall  = true
     link_down = false
     tag       = 70
   }

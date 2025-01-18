@@ -2,6 +2,7 @@ resource "proxmox_vm_qemu" "workers_1" {
   name                        = "rke2-worker-1${count.index + 1}"
   count                       = 3
   target_node                 = "pve-1"
+  protection                  = false
   vmid                        = 20004 + count.index
   vm_state                    = "running"
   ciuser                      = "appdepl"
@@ -25,11 +26,12 @@ resource "proxmox_vm_qemu" "workers_1" {
   scsihw                      = "virtio-scsi-pci"
   force_recreate_on_change_of = "cicustom"
   ipconfig0                   = "gw=10.100.70.1,ip=10.100.70.${110 + count.index}/24,ip6=dhcp"
-  onboot                      = true
+  onboot                      = false
   network {
+    id        = 0
     model     = "virtio"
     bridge    = "vmbr0"
-    firewall  = false
+    firewall  = true
     link_down = false
     tag       = 70
   }
@@ -63,10 +65,12 @@ resource "proxmox_vm_qemu" "workers_2" {
   force_recreate_on_change_of = "cicustom"
   ipconfig0                   = "gw=10.100.70.1,ip=10.100.70.${140 + count.index}/24,ip6=dhcp"
   onboot                      = true
+  protection                  = false
   network {
+    id        = 0
     model     = "virtio"
     bridge    = "vmbr0"
-    firewall  = false
+    firewall  = true
     link_down = false
     tag       = 70
   }
@@ -101,10 +105,12 @@ resource "proxmox_vm_qemu" "workers_3" {
   force_recreate_on_change_of = "cicustom"
   ipconfig0                   = "gw=10.100.70.1,ip=10.100.70.${160 + count.index}/24,ip6=dhcp"
   onboot                      = true
+  protection                  = false
   network {
+    id        = 0
     model     = "virtio"
     bridge    = "vmbr0"
-    firewall  = false
+    firewall  = true
     link_down = false
     tag       = 70
   }
