@@ -20,9 +20,7 @@ def generate_inventory():
     output = get_terraform_output()
 
     # Get IP configurations for workers and controllers
-    workers_1_ipconfig = output["workers_1_ipconfig"]["value"]
-    workers_2_ipconfig = output["workers_2_ipconfig"]["value"]
-    workers_3_ipconfig = output["workers_3_ipconfig"]["value"]
+    workers = output["workers_ipconfig"]["value"]
     controllers = output["controllers_ipconfig"]["value"]
 
     # Define Ansible user for all hosts (you can make this dynamic or specific per host)
@@ -49,23 +47,11 @@ def generate_inventory():
                             }
                         },
                         "worker": {
-                            "children": {
-                                "lightweight": {
-                                    "hosts": {
-                                        worker: {
-                                            "ansible_host": extract_ip(config),
-                                            "ansible_user": ansible_user
-                                        } for worker, config in workers_1_ipconfig.items()
-                                    }
-                                },
-                                "statefull": {
-                                    "hosts": {
-                                        worker: {
-                                            "ansible_host": extract_ip(config),
-                                            "ansible_user": ansible_user
-                                        } for worker, config in {**workers_2_ipconfig, **workers_3_ipconfig}.items()
-                                    }
-                                }
+                            "hosts": {
+                                worker: {
+                                    "ansible_host": extract_ip(config),
+                                    "ansible_user": ansible_user
+                                } for worker, config in workers.items()
                             }
                         }
                     }

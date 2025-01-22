@@ -19,11 +19,32 @@ variable "pm_password" {
 }
 
 
-variable "pve_nodes" {
-  type    = list(string)
+variable "controller_vms" {
+
+  type = list(object({
+    target_node = string
+    vmid        = number
+    ip_address  = string
+    name        = string
+    memory      = number
+    cores       = number
+    vcpus       = number
+  }))
   default = []
 }
+variable "worker_vms" {
 
+  type = list(object({
+    target_node = string
+    vmid        = number
+    ip_address  = string
+    name        = string
+    memory      = number
+    cores       = number
+    vcpus       = number
+  }))
+  default = []
+}
 variable "ssh_keys" {
   type = string
 }
@@ -33,4 +54,19 @@ variable "ssh_keys" {
 variable "template_name" {
   type    = string
   default = "u-2404-tmpl"
+}
+
+
+variable "gateway" {
+  type = string
+}
+
+variable "subnet" {
+  type    = number
+  default = 24
+}
+
+variable "network_tag" {
+  type    = number
+  default = 70
 }
