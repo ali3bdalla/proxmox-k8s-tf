@@ -78,7 +78,47 @@ Below is an example of the variables you can define in your `terraform.tfvars` f
 
 ```hcl
 pm_api_url      = "https://proxmox-host:8006/api2/json"
-pve_nodes       = ["pve-1", "pve-2", "pve-3"]
+gateway    = "10.100.70.1"
+subnet     = 24
+controller_vms = [{
+  target_node = "pve-2"
+  vmid        = 20001
+  ip_address  = "10.100.70.201",
+  name        = "staging-controller-1",
+  memory      = 4096,
+  cores       = 2,
+  vcpus       = 2,
+}]
+
+worker_vms = [
+  {
+    target_node = "pve-1"
+    vmid        = 20002
+    ip_address  = "10.100.70.202",
+    name        = "staging-worker-1",
+    memory      = 12288,
+    cores       = 4
+    vcpus       = 4,
+  },
+  {
+    target_node = "pve-2"
+    vmid        = 20003
+    ip_address  = "10.100.70.203",
+    name        = "staging-worker-2",
+    memory      = 12288,
+    cores       = 4
+    vcpus       = 4,
+  },
+  {
+    target_node = "pve-3"
+    vmid        = 20004
+    ip_address  = "10.100.70.204",
+    name        = "staging-worker-3",
+    memory      = 8192,
+    cores       = 4
+    vcpus       = 4,
+  }
+]
 pm_enable_debug = true
 pm_user         = "test@pve"
 pm_password     = "x"
