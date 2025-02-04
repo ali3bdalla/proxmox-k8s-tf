@@ -53,7 +53,7 @@ variable "ssh_keys" {
 
 variable "template_name" {
   type    = string
-  default = "u-2404-tmpl"
+  default = "ubuntu-2404-tmpl"
 }
 
 

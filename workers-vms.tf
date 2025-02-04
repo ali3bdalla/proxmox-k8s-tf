@@ -44,7 +44,7 @@ resource "proxmox_vm_qemu" "workers" {
         disk {
           storage = "local-lvm"
           # The size of the disk should be at least as big as the disk in the template. If it's smaller, the disk will be recreated
-          size = "64G"
+          size = "128G"
         }
       }
     }
